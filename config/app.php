@@ -188,6 +188,8 @@ return [
 
         Maatwebsite\Excel\ExcelServiceProvider::class, //for excel
         Spatie\Permission\PermissionServiceProvider::class, //for premission package
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class, //facasto for chrat.js
+
 
 
         /*
