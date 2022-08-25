@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MyEventNotification;
 use App\Http\Controllers\invoices\ArcheiveInvoicesController;
 use App\Http\Controllers\Invoices\InvoicesDetailsController;
 use App\Http\Controllers\Invoices\ReportInvoicesController;
@@ -84,6 +85,12 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 
+
+
+Route::get('test', function () {
+    event(new MyEventNotification());
+    return "Event has been sent!";
+});
 
 
 

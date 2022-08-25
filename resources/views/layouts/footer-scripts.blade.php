@@ -31,3 +31,31 @@
 <!-- custom js -->
 <script src="{{URL::asset('assets/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('assets/plugins/side-menu/sidemenu.js')}}"></script>
+
+
+
+<!-- ------------------pusher code -----------------------------  --->
+
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('b3ca0281068dd9c30db0', {
+        cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('notif-channel');
+    channel.bind('my-added', function(data) {
+     /*   alert(JSON.stringify(data));
+        console.log('hkng fhnm ');*/
+        $("#notifications_count").load(window.location.href + " #notifications_count");
+        $("#unreadNotifications").load(window.location.href + " #unreadNotifications");
+
+
+    });
+
+
+
+</script>

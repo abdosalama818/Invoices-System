@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MyEventNotification;
 use App\Events\SendEmailEvent;
 use App\Models\Invoice;
 use App\Models\invoice_attachments;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\User;
+use App\Notifications\InvoiceNotification;
 use App\Repository\InvoicesRepository;
 use App\Traits\GetDataFromModels;
 use App\Traits\InvoicesTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,6 +56,12 @@ class InvoicesController extends Controller
         $user = User::where('id',Auth::id())->first();
        // dd( $user);
       /*  event(new SendEmailEvent($user));*/
+       // $users = User::where('id','<>',Auth::id())->get();
+        $users = User::get();
+        $invoice = Invoice::latest()->first();
+       // dd($invoice);
+        Notification::send($users, new InvoiceNotification($invoice));
+        event(new MyEventNotification());
         return redirect('invoices');
     }
 
